@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<!--
+  ███ ERRAND BOYS — one file, no build step, no dependencies. ███
+
+  TO CHANGE YOUR PHONE NUMBER, PRICES, PRODUCTS OR DELIVERY FEES:
+      search this file for:   const CONFIG
+      (it's near the bottom of the file, inside the script block)
+
+  AFTER YOU DEPLOY, do one find-and-replace in this file:
+      https://REPLACE-WITH-YOUR-URL   ->   your real site address
+  That switches on the link-preview card for WhatsApp and Instagram.
+  See DEPLOY.md for the full walkthrough.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Errand Boys — GCTU Campus Convenience Service | Need it? We'll get it.</title>
+<meta name="description" content="Student-run errand, essentials and hostel-delivery service for GCTU. Send your list on WhatsApp, we get it, we deliver to your room. We also hype student brands to the whole campus.">
+<meta name="theme-color" content="#08080a">
+
+<!-- Link preview card (WhatsApp, Instagram, Facebook, X). -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Errand Boys">
+<meta property="og:title" content="Errand Boys — Need it? We'll get it.">
+<meta property="og:description" content="GCTU's student-run errand & hostel delivery service. Send your list on WhatsApp — we bring it to your room. Campus GH₵5 · Tesano GH₵7 · Abeka GH₵10.">
+<meta property="og:url" content="https://REPLACE-WITH-YOUR-URL/">
+<meta property="og:image" content="https://REPLACE-WITH-YOUR-URL/share-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Errand Boys — Need it? We'll get it.">
+<meta name="twitter:description" content="GCTU's student-run errand & hostel delivery service. Send your list on WhatsApp — we bring it to your room.">
+<meta name="twitter:image" content="https://REPLACE-WITH-YOUR-URL/share-card.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2308080a'/%3E%3Cpath d='M20 24h10l10 38h34l9-26H38' stroke='%23FFC107' stroke-width='7' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='44' cy='76' r='6' fill='%232DD4BF'/%3E%3Ccircle cx='70' cy='76' r='6' fill='%232DD4BF'/%3E%3C/svg%3E">
+<style>
+/* ============================================================
+   ERRAND BOYS — single-file site. No external requests.
+   Brand: near-black canvas, amber #FFC107, teal #2DD4BF, coral #FF5A5F
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#08080a; --panel:#131318; --panel2:#1a1a21; --panel3:#212129;
+  --line:#2b2b35; --line2:#3a3a46;
+  --amber:#FFC107; --amber-d:#e0a800;
+  --teal:#2DD4BF; --coral:#FF5A5F; --orange:#FF7A3D; --wa:#25D366;
+  --txt:#f6f6f8; --mut:#9b9bA8; --mut2:#6f6f7d;
+  --r:16px; --rl:24px;
+  --ff:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif;
+  --shadow:0 20px 60px -20px rgba(0,0,0,.9);
+  --nav-h:68px;
+}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--ff); background:var(--ink); color:var(--txt);
+  line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased;
+  font-size:16px;
+}
+body.locked{overflow:hidden}
+img,svg{display:block;max-width:100%}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--amber);color:#000}
+
+/* scrollbar */
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:10px}
+::-webkit-scrollbar-thumb:hover{background:#4d4d5c}
+
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- type ---------- */
+h1,h2,h3,h4{line-height:1.08;letter-spacing:-.025em;font-weight:800}
+h1{font-size:clamp(2.6rem,7.5vw,5.1rem)}
+h2{font-size:clamp(1.9rem,4.4vw,3rem)}
+h3{font-size:clamp(1.1rem,2vw,1.3rem);letter-spacing:-.015em}
+.eyebrow{
+  font-size:.72rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--teal);display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.eyebrow::before{content:"";width:26px;height:3px;background:var(--amber);border-radius:3px;flex:none}
+.lead{color:var(--mut);font-size:clamp(1rem,1.6vw,1.12rem);max-width:62ch}
+.amber{color:var(--amber)} .teal{color:var(--teal)} .coral{color:var(--coral)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:14px 24px;border-radius:999px;border:1px solid transparent;
+  font-weight:700;font-size:.95rem;cursor:pointer;white-space:nowrap;
+  transition:transform .18s cubic-bezier(.34,1.3,.64,1),box-shadow .18s,background .18s,border-color .18s;
+  text-align:center;line-height:1.2;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-amber{background:var(--amber);color:#17120a;box-shadow:0 8px 28px -8px rgba(255,193,7,.6)}
+.btn-amber:hover{background:#ffd033;box-shadow:0 14px 36px -10px rgba(255,193,7,.75)}
+.btn-wa{background:var(--wa);color:#04210f;box-shadow:0 8px 28px -8px rgba(37,211,102,.55)}
+.btn-wa:hover{background:#34e478}
+.btn-ghost{background:rgba(255,255,255,.04);border-color:var(--line2);color:var(--txt)}
+.btn-ghost:hover{background:rgba(255,255,255,.09);border-color:#55556a}
+.btn-teal{background:var(--teal);color:#042420}
+.btn-teal:hover{background:#49e5d1}
+.btn-sm{padding:10px 18px;font-size:.86rem}
+.btn-block{width:100%}
+.btn[disabled]{opacity:.45;pointer-events:none}
+
+/* ---------- nav ---------- */
+header.nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;height:var(--nav-h);
+  display:flex;align-items:center;
+  background:rgba(8,8,10,.72);backdrop-filter:blur(18px) saturate(1.6);
+  -webkit-backdrop-filter:blur(18px) saturate(1.6);
+  border-bottom:1px solid transparent;transition:border-color .3s,background .3s;
+}
+header.nav.stuck{border-bottom-color:var(--line);background:rgba(8,8,10,.92)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%}
+.logo{display:flex;align-items:center;gap:10px;flex:none}
+.logo svg{width:30px;height:30px;flex:none}
+.logo-txt{display:flex;flex-direction:column;line-height:1}
+.logo-txt b{font-size:1.02rem;font-weight:900;letter-spacing:-.02em}
+.logo-txt .sw{display:block;width:100%;height:5px;margin-top:2px}
+.logo-txt span{font-size:.5rem;letter-spacing:.16em;color:var(--mut2);text-transform:uppercase;margin-top:2px;font-weight:700}
+.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links a{
+  padding:9px 14px;border-radius:999px;font-size:.88rem;font-weight:600;color:var(--mut);
+  transition:color .18s,background .18s;
+}
+.nav-links a:hover{color:var(--txt);background:rgba(255,255,255,.06)}
+.nav-right{display:flex;align-items:center;gap:10px;flex:none}
+.cart-btn{
+  position:relative;display:inline-flex;align-items:center;gap:8px;
+  padding:10px 16px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);
+  cursor:pointer;font-weight:700;font-size:.86rem;transition:.18s;
+}
+.cart-btn:hover{border-color:var(--amber);background:var(--panel3)}
+.cart-count{
+  min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:var(--amber);color:#000;
+  font-size:.7rem;font-weight:900;display:grid;place-items:center;
+}
+.burger{display:none;width:42px;height:42px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);cursor:pointer;place-items:center}
+.burger svg{width:20px;height:20px}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:calc(var(--nav-h) + 56px) 0 70px;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;opacity:.5;animation:float 14s ease-in-out infinite}
+.g1{width:520px;height:520px;background:radial-gradient(circle,rgba(255,193,7,.35),transparent 68%);top:-160px;left:-120px}
+.g2{width:440px;height:440px;background:radial-gradient(circle,rgba(45,212,191,.3),transparent 68%);top:120px;right:-130px;animation-delay:-5s}
+.g3{width:380px;height:380px;background:radial-gradient(circle,rgba(255,90,95,.22),transparent 70%);bottom:-140px;left:35%;animation-delay:-9s}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(28px,-26px) scale(1.07)}66%{transform:translate(-22px,18px) scale(.95)}}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.12fr .88fr;gap:52px;align-items:center}
+.pill{
+  display:inline-flex;align-items:center;gap:9px;padding:7px 15px 7px 9px;border-radius:999px;
+  background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.3);
+  font-size:.76rem;font-weight:700;color:var(--teal);margin-bottom:22px;letter-spacing:.01em;
+}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 0 rgba(45,212,191,.7);animation:pulse 2.2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(45,212,191,0)}100%{box-shadow:0 0 0 0 rgba(45,212,191,0)}}
+h1 .l2{color:var(--amber);display:block}
+.hero p.lead{margin:22px 0 30px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:34px}
+.chips{display:flex;gap:9px;flex-wrap:wrap}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;
+  background:var(--panel2);border:1px solid var(--line);font-size:.8rem;font-weight:600;color:var(--mut);
+}
+.chip i{width:6px;height:6px;border-radius:50%;flex:none;font-style:normal}
+
+/* phone mock */
+.phone-wrap{display:flex;justify-content:center;perspective:1200px}
+.phone{
+  width:100%;max-width:330px;background:linear-gradient(165deg,#1d1d25,#101016);
+  border:1px solid var(--line2);border-radius:38px;padding:13px;box-shadow:var(--shadow);
+  transform:rotateY(-11deg) rotateX(4deg);transition:transform .6s cubic-bezier(.2,.8,.2,1);
+}
+.phone:hover{transform:rotateY(0) rotateX(0) translateY(-6px)}
+.screen{background:#0b0b0f;border-radius:28px;overflow:hidden;border:1px solid #26262f}
+.wa-top{display:flex;align-items:center;gap:10px;padding:13px 14px;background:#1f2c33;border-bottom:1px solid #2a3942}
+.wa-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--amber),var(--orange));display:grid;place-items:center;font-size:1rem;flex:none}
+.wa-name{font-size:.85rem;font-weight:700;line-height:1.25}
+.wa-sub{font-size:.65rem;color:var(--teal);font-weight:600}
+.wa-body{padding:16px 13px;display:flex;flex-direction:column;gap:9px;min-height:310px;background:#0b141a}
+.bub{max-width:84%;padding:9px 13px;border-radius:14px;font-size:.79rem;line-height:1.45;animation:pop .5s backwards}
+.bub.in{background:#202c33;border-bottom-left-radius:4px;align-self:flex-start}
+.bub.out{background:#005c4b;border-bottom-right-radius:4px;align-self:flex-end}
+.bub small{display:block;font-size:.58rem;opacity:.55;text-align:right;margin-top:3px}
+.bub:nth-child(1){animation-delay:.2s}.bub:nth-child(2){animation-delay:.9s}
+.bub:nth-child(3){animation-delay:1.5s}.bub:nth-child(4){animation-delay:2.1s}
+.bub:nth-child(5){animation-delay:2.7s}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.96)}to{opacity:1;transform:none}}
+
+/* ---------- sections ---------- */
+section{padding:84px 0;position:relative}
+.sec-head{margin-bottom:46px;max-width:760px}
+.sec-head h2{margin-bottom:14px}
+.alt{background:linear-gradient(180deg,transparent,rgba(255,255,255,.018) 12%,rgba(255,255,255,.018) 88%,transparent)}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;counter-reset:s}
+.step{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--rl);padding:26px 22px;
+  position:relative;overflow:hidden;transition:transform .25s,border-color .25s;
+}
+.step:hover{transform:translateY(-5px);border-color:var(--line2)}
+.step::after{content:"";position:absolute;inset:0 auto 0 0;width:3px;background:var(--c)}
+.step-n{
+  counter-increment:s;font-size:.7rem;font-weight:900;letter-spacing:.14em;color:var(--c);margin-bottom:16px;
+}
+.step-n::before{content:"0" counter(s)}
+.step-ico{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;margin-bottom:15px;font-size:1.3rem;background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 28%,transparent)}
+.step h3{margin-bottom:8px}
+.step p{font-size:.88rem;color:var(--mut);line-height:1.55}
+
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pillar{
+  background:linear-gradient(170deg,var(--panel2),var(--panel));border:1px solid var(--line);
+  border-radius:var(--rl);padding:30px;transition:transform .25s,border-color .25s;position:relative;overflow:hidden;
+}
+.pillar:hover{transform:translateY(-6px);border-color:color-mix(in srgb,var(--c) 45%,transparent)}
+.pillar::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--c)}
+.pillar .big{font-size:2rem;margin-bottom:16px}
+.pillar h3{margin-bottom:10px}
+.pillar p{color:var(--mut);font-size:.92rem;margin-bottom:18px}
+.pillar ul{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+.pillar li{font-size:.86rem;color:var(--mut);display:flex;gap:10px;align-items:flex-start}
+.pillar li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--c);margin-top:8px;flex:none}
+
+/* ---------- shop ---------- */
+.shop-bar{
+  display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:26px;
+  position:sticky;top:var(--nav-h);z-index:60;padding:14px 0;
+  background:linear-gradient(180deg,var(--ink) 75%,transparent);
+}
+.search{
+  flex:1;min-width:220px;display:flex;align-items:center;gap:10px;padding:0 16px;
+  background:var(--panel2);border:1px solid var(--line);border-radius:999px;transition:border-color .2s;
+}
+.search:focus-within{border-color:var(--amber)}
+.search svg{width:17px;height:17px;color:var(--mut2);flex:none}
+.search input{flex:1;background:none;border:0;outline:0;padding:13px 0;font-size:.92rem}
+.search input::placeholder{color:var(--mut2)}
+.cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:3px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cat{
+  padding:10px 17px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);
+  font-size:.84rem;font-weight:700;color:var(--mut);cursor:pointer;white-space:nowrap;transition:.18s;
+}
+.cat:hover{color:var(--txt);border-color:var(--line2)}
+.cat.on{background:var(--amber);color:#17120a;border-color:var(--amber)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(188px,1fr));gap:16px}
+.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;transition:transform .22s,border-color .22s,box-shadow .22s;
+}
+.card:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:0 16px 40px -22px rgba(0,0,0,.9)}
+.card-img{
+  height:112px;display:grid;place-items:center;font-size:2.6rem;position:relative;
+  background:radial-gradient(circle at 50% 42%,color-mix(in srgb,var(--c) 22%,transparent),transparent 72%),var(--panel2);
+  border-bottom:1px solid var(--line);
+}
+.tag{
+  position:absolute;top:9px;left:9px;padding:3px 9px;border-radius:999px;font-size:.6rem;
+  font-weight:900;letter-spacing:.07em;text-transform:uppercase;background:var(--c);color:#000;
+}
+.card-b{padding:14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.card-cat{font-size:.63rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--c)}
+.card-n{font-size:.9rem;font-weight:700;line-height:1.3}
+.card-d{font-size:.74rem;color:var(--mut2);line-height:1.4;margin-bottom:6px}
+.card-f{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:8px}
+.price{font-size:1.02rem;font-weight:900;letter-spacing:-.02em}
+.price small{font-size:.66rem;color:var(--mut2);font-weight:600}
+.add{
+  width:36px;height:36px;border-radius:11px;background:var(--amber);color:#000;border:0;cursor:pointer;
+  display:grid;place-items:center;font-weight:900;font-size:1.15rem;transition:.18s;flex:none;line-height:1;
+}
+.add:hover{background:#ffd033;transform:scale(1.1) rotate(90deg)}
+.add.in{background:var(--teal)}
+.qty-mini{display:flex;align-items:center;gap:0;background:var(--panel3);border-radius:11px;border:1px solid var(--line2);overflow:hidden}
+.qty-mini button{width:30px;height:34px;background:none;border:0;cursor:pointer;color:var(--txt);font-size:1rem;font-weight:800;transition:.15s}
+.qty-mini button:hover{background:rgba(255,255,255,.1);color:var(--amber)}
+.qty-mini span{min-width:24px;text-align:center;font-weight:800;font-size:.85rem}
+.empty{grid-column:1/-1;text-align:center;padding:56px 20px;color:var(--mut2)}
+.empty div{font-size:2.4rem;margin-bottom:12px}
+
+/* ---------- cart drawer ---------- */
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);z-index:950;opacity:0;pointer-events:none;transition:opacity .3s}
+.scrim.on{opacity:1;pointer-events:auto}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;width:min(430px,100%);z-index:960;
+  background:var(--panel);border-left:1px solid var(--line);
+  display:flex;flex-direction:column;transform:translateX(100%);transition:transform .38s cubic-bezier(.3,.9,.3,1);
+}
+.drawer.on{transform:none}
+.dr-head{padding:20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex:none}
+.dr-head h3{font-size:1.15rem}
+.dr-head p{font-size:.74rem;color:var(--mut2);margin-top:2px}
+.x{width:36px;height:36px;border-radius:11px;background:var(--panel3);border:1px solid var(--line);cursor:pointer;display:grid;place-items:center;transition:.18s;flex:none}
+.x:hover{background:var(--coral);border-color:var(--coral);color:#fff;transform:rotate(90deg)}
+.x svg{width:16px;height:16px}
+.dr-body{flex:1;overflow-y:auto;padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.ci{display:flex;gap:12px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.ci:last-of-type{border-bottom:0}
+.ci-img{width:46px;height:46px;border-radius:11px;display:grid;place-items:center;font-size:1.35rem;background:var(--panel3);border:1px solid var(--line);flex:none}
+.ci-m{flex:1;min-width:0}
+.ci-m b{display:block;font-size:.85rem;font-weight:700;line-height:1.3}
+.ci-m span{font-size:.76rem;color:var(--mut2)}
+.ci-r{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+.ci-p{font-weight:800;font-size:.9rem}
+.rm{background:none;border:0;color:var(--mut2);font-size:.68rem;cursor:pointer;text-decoration:underline;padding:0}
+.rm:hover{color:var(--coral)}
+
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label{font-size:.73rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--mut)}
+.fld label .req{color:var(--coral)}
+.fld input,.fld select,.fld textarea{
+  width:100%;padding:12px 14px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;
+  outline:0;font-size:.9rem;transition:border-color .2s;
+}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--amber)}
+.fld textarea{resize:vertical;min-height:78px;line-height:1.5}
+.fld select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239b9ba8' stroke-width='2.5' stroke-linecap='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:16px;padding-right:38px}
+.fld .hint{font-size:.7rem;color:var(--mut2);line-height:1.45}
+.fld.err input,.fld.err select{border-color:var(--coral)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.seg{display:flex;gap:8px}
+.seg label{
+  flex:1;padding:11px 8px;border-radius:12px;background:var(--panel2);border:1px solid var(--line);
+  text-align:center;cursor:pointer;font-size:.8rem;font-weight:700;color:var(--mut);transition:.18s;
+  text-transform:none;letter-spacing:0;
+}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label:hover{border-color:var(--line2);color:var(--txt)}
+.seg input:checked + span{color:#17120a}
+.seg label.on{background:var(--amber);border-color:var(--amber);color:#17120a}
+
+.dr-foot{padding:18px 20px;border-top:1px solid var(--line);background:var(--panel2);flex:none;display:flex;flex-direction:column;gap:12px}
+.totals{display:flex;flex-direction:column;gap:7px}
+.tr{display:flex;justify-content:space-between;font-size:.86rem;color:var(--mut)}
+.tr.grand{font-size:1.18rem;font-weight:900;color:var(--txt);padding-top:9px;border-top:1px dashed var(--line2);letter-spacing:-.02em}
+.tr.grand span:last-child{color:var(--amber)}
+.note{font-size:.68rem;color:var(--mut2);text-align:center;line-height:1.5}
+
+/* sent panel */
+.sent{display:none;flex-direction:column;gap:14px;padding:18px 20px;flex:1;overflow-y:auto}
+.sent.on{display:flex}
+.sent-ico{width:62px;height:62px;border-radius:50%;background:rgba(37,211,102,.14);border:1px solid rgba(37,211,102,.4);display:grid;place-items:center;font-size:1.8rem;margin:10px auto 0}
+.sent h3{text-align:center}
+.sent p{text-align:center;font-size:.86rem;color:var(--mut)}
+.msgbox{
+  background:var(--ink);border:1px solid var(--line);border-radius:12px;padding:14px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.72rem;
+  white-space:pre-wrap;word-break:break-word;color:var(--mut);max-height:230px;overflow-y:auto;line-height:1.55;
+}
+.ordno{text-align:center;font-weight:900;font-size:1.3rem;color:var(--amber);letter-spacing:.04em}
+
+/* ---------- errand form ---------- */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--rl);padding:30px}
+.panel h3{margin-bottom:6px}
+.panel > p.sub{font-size:.88rem;color:var(--mut);margin-bottom:22px}
+.form{display:flex;flex-direction:column;gap:15px}
+.ex-list{display:flex;flex-direction:column;gap:12px}
+.ex{
+  display:flex;gap:14px;align-items:flex-start;padding:16px;background:var(--panel2);
+  border:1px solid var(--line);border-radius:var(--r);transition:.22s;cursor:default;
+}
+.ex:hover{border-color:var(--line2);transform:translateX(4px)}
+.ex-i{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:1.2rem;flex:none;background:color-mix(in srgb,var(--c) 15%,transparent);border:1px solid color-mix(in srgb,var(--c) 30%,transparent)}
+.ex b{display:block;font-size:.92rem;margin-bottom:3px}
+.ex span{font-size:.8rem;color:var(--mut)}
+
+/* ---------- brands / ads ---------- */
+.tiers{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:stretch}
+.tier{
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--rl);padding:26px 22px;
+  display:flex;flex-direction:column;position:relative;transition:transform .25s,border-color .25s;
+}
+.tier:hover{transform:translateY(-6px)}
+.tier.feat{border-color:var(--amber);background:linear-gradient(175deg,rgba(255,193,7,.08),var(--panel) 42%)}
+.tier.feat::before{
+  content:"MOST POPULAR";position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  background:var(--amber);color:#000;font-size:.6rem;font-weight:900;letter-spacing:.1em;
+  padding:4px 13px;border-radius:999px;white-space:nowrap;
+}
+.tier-n{font-size:.68rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--c);margin-bottom:12px}
+.tier-p{font-size:2.1rem;font-weight:900;letter-spacing:-.035em;line-height:1;margin-bottom:4px}
+.tier-p small{font-size:.8rem;font-weight:700;color:var(--mut2);letter-spacing:0}
+.tier-d{font-size:.78rem;color:var(--mut2);margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.tier ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:22px;flex:1}
+.tier li{font-size:.82rem;color:var(--mut);display:flex;gap:9px;align-items:flex-start;line-height:1.45}
+.tier li svg{width:14px;height:14px;color:var(--teal);flex:none;margin-top:4px}
+.addons{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.addon{display:flex;align-items:center;gap:12px;padding:15px 17px;background:var(--panel2);border:1px solid var(--line);border-radius:var(--r)}
+.addon .ai{font-size:1.3rem;flex:none}
+.addon b{display:block;font-size:.85rem}
+.addon span{font-size:.74rem;color:var(--mut2)}
+.addon .ap{margin-left:auto;font-weight:900;color:var(--amber);font-size:.92rem;white-space:nowrap}
+.founding{
+  display:flex;gap:16px;align-items:center;padding:20px 24px;margin-top:24px;
+  background:linear-gradient(100deg,rgba(45,212,191,.1),rgba(255,193,7,.07));
+  border:1px solid rgba(45,212,191,.3);border-radius:var(--r);
+}
+.founding .fi{font-size:1.7rem;flex:none}
+.founding b{display:block;font-size:.95rem;margin-bottom:3px}
+.founding p{font-size:.84rem;color:var(--mut);margin:0}
+
+/* ---------- zones ---------- */
+.zones{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.zone{background:var(--panel);border:1px solid var(--line);border-radius:var(--rl);padding:24px;transition:.25s;position:relative;overflow:hidden}
+.zone:hover{border-color:color-mix(in srgb,var(--c) 50%,transparent);transform:translateY(-4px)}
+.zone-t{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.zone-b{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:.8rem;font-weight:900;background:var(--c);color:#000;flex:none}
+.zone h3{font-size:1rem}
+.zone .fee{font-size:1.7rem;font-weight:900;letter-spacing:-.03em;margin:10px 0 4px;color:var(--c)}
+.zone .fee small{font-size:.72rem;color:var(--mut2);font-weight:600;letter-spacing:0}
+.zone ul{list-style:none;display:flex;flex-direction:column;gap:6px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.zone li{font-size:.79rem;color:var(--mut)}
+
+/* ---------- faq ---------- */
+.faq{display:flex;flex-direction:column;gap:11px;max-width:860px}
+details{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:border-color .2s}
+details[open]{border-color:var(--line2)}
+summary{
+  padding:19px 22px;cursor:pointer;font-weight:700;font-size:.96rem;display:flex;
+  align-items:center;justify-content:space-between;gap:16px;list-style:none;transition:color .18s;
+}
+summary::-webkit-details-marker{display:none}
+summary:hover{color:var(--amber)}
+summary::after{content:"+";font-size:1.4rem;font-weight:400;color:var(--amber);transition:transform .25s;flex:none;line-height:1}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 22px 20px;color:var(--mut);font-size:.9rem;line-height:1.65}
+
+/* ---------- cta band ---------- */
+.band{
+  background:linear-gradient(120deg,rgba(255,193,7,.1),rgba(45,212,191,.08),rgba(255,90,95,.07));
+  border:1px solid var(--line);border-radius:28px;padding:54px 40px;text-align:center;position:relative;overflow:hidden;
+}
+.band h2{margin-bottom:14px}
+.band p{color:var(--mut);max-width:54ch;margin:0 auto 28px}
+.band-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:52px 0 32px;background:var(--panel)}
+.f-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1.3fr;gap:36px;margin-bottom:38px}
+.f-col h4{font-size:.72rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--mut2);margin-bottom:16px}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.f-col a,.f-col li{font-size:.87rem;color:var(--mut);transition:color .18s}
+.f-col a:hover{color:var(--amber)}
+.f-about p{font-size:.86rem;color:var(--mut);margin:14px 0 18px;max-width:34ch}
+.f-wa{display:inline-flex;align-items:center;gap:11px;padding:11px 18px;border-radius:14px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.28);transition:.2s}
+.f-wa:hover{background:rgba(37,211,102,.18);transform:translateY(-2px)}
+.f-wa svg{width:20px;height:20px;color:var(--wa);flex:none}
+.f-wa b{display:block;font-size:.95rem;font-weight:800;letter-spacing:.01em}
+.f-wa span{font-size:.65rem;color:var(--mut2);letter-spacing:.06em;text-transform:uppercase;font-weight:700}
+.f-bot{border-top:1px solid var(--line);padding-top:24px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
+.f-bot p{font-size:.78rem;color:var(--mut2)}
+
+/* float wa */
+.fab{
+  position:fixed;bottom:22px;right:22px;z-index:800;width:56px;height:56px;border-radius:50%;
+  background:var(--wa);display:grid;place-items:center;box-shadow:0 10px 32px -8px rgba(37,211,102,.65);
+  transition:transform .22s;
+}
+.fab:hover{transform:scale(1.1)}
+.fab svg{width:28px;height:28px;color:#04210f}
+.fab::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa);animation:ring 2.4s infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.8}100%{transform:scale(1.45);opacity:0}}
+
+/* toast */
+.toast{
+  position:fixed;bottom:26px;left:50%;transform:translate(-50%,120px);z-index:990;
+  background:var(--panel3);border:1px solid var(--line2);border-radius:999px;padding:12px 22px;
+  font-size:.87rem;font-weight:700;box-shadow:var(--shadow);display:flex;align-items:center;gap:10px;
+  transition:transform .35s cubic-bezier(.34,1.3,.64,1);max-width:90vw;
+}
+.toast.on{transform:translate(-50%,0)}
+.toast .tk{color:var(--teal);font-size:1rem}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.show{opacity:1;transform:none}
+
+/* ---------- responsive ---------- */
+@media(max-width:1024px){
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .phone-wrap{order:-1}
+  .phone{transform:none;max-width:300px}
+  .steps,.tiers,.zones{grid-template-columns:repeat(2,1fr)}
+  .pillars{grid-template-columns:1fr}
+  .f-grid{grid-template-columns:1fr 1fr;gap:30px}
+  .addons{grid-template-columns:1fr}
+}
+@media(max-width:860px){
+  .nav-links{
+    position:fixed;top:var(--nav-h);left:0;right:0;flex-direction:column;align-items:stretch;
+    background:rgba(8,8,10,.97);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);
+    padding:14px 20px 20px;gap:2px;
+    transform:translateY(-130%);transition:transform .32s cubic-bezier(.3,.9,.3,1);
+  }
+  .nav-links.on{transform:none}
+  .nav-links a{padding:13px 14px;font-size:.95rem}
+  .burger{display:grid}
+  .two{grid-template-columns:1fr;gap:24px}
+  section{padding:62px 0}
+  .shop-bar{position:static;background:none;padding:0 0 18px}
+}
+@media(max-width:600px){
+  .steps,.tiers,.zones{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+  .f-grid{grid-template-columns:1fr}
+  .panel,.band{padding:26px 20px}
+  .row2{grid-template-columns:1fr}
+  .cart-btn span.lbl{display:none}
+  .hero{padding-top:calc(var(--nav-h) + 34px)}
+  .card-img{height:92px;font-size:2.1rem}
+  .fab{bottom:16px;right:16px;width:50px;height:50px}
+  .band{padding:38px 22px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="#top" class="logo" aria-label="Errand Boys home">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#131318" stroke="#2b2b35" stroke-width="2"/>
+        <path d="M20 24h10l10 38h34l9-26H38" stroke="#FFC107" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="44" cy="76" r="6" fill="#2DD4BF"/><circle cx="70" cy="76" r="6" fill="#2DD4BF"/>
+      </svg>
+      <span class="logo-txt"><b>ERRAND <span class="amber">BOYS</span></b><svg class="sw" viewBox="0 0 120 6" preserveAspectRatio="none" aria-hidden="true"><path d="M2 3.4 C 24 5.6, 41 1.1, 64 2.6 S 100 5.2, 118 1.6" fill="none" stroke="#FF7A3D" stroke-width="2.1" stroke-linecap="round"/></svg><span>Campus runs · errands · essentials</span></span>
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#shop">Shop</a>
+      <a href="#errands">Send an errand</a>
+      <a href="#brands">For brands</a>
+      <a href="#zones">Zones &amp; fees</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" id="cartBtn" aria-label="Open your basket">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="lbl">Basket</span><span class="cart-count" id="cc">0</span>
+      </button>
+      <button class="burger" id="burger" aria-label="Menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div id="top"></div>
+<section class="hero">
+  <div class="glow g1"></div><div class="glow g2"></div><div class="glow g3"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span> Launching this semester · GCTU Tesano &amp; Abeka</span>
+      <h1>Need it?<span class="l2">We'll get it.</span></h1>
+      <p class="lead">Too lazy to leave your hostel? Say less. We brave the traffic and the hot sun — we run your errands, deliver campus essentials to your exact room, and hype your business to all of GCTU.</p>
+      <div class="hero-cta">
+        <a href="#shop" class="btn btn-amber">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          Shop essentials
+        </a>
+        <a href="#errands" class="btn btn-ghost">Send us an errand →</a>
+      </div>
+      <div class="chips">
+        <span class="chip"><i style="background:var(--amber)"></i> Delivered to your room</span>
+        <span class="chip"><i style="background:var(--teal)"></i> MoMo or cash on delivery</span>
+        <span class="chip"><i style="background:var(--coral)"></i> Every order gets a number</span>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="screen">
+          <div class="wa-top">
+            <div class="wa-av">🛒</div>
+            <div><div class="wa-name">Errand Boys</div><div class="wa-sub">online</div></div>
+          </div>
+          <div class="wa-body">
+            <div class="bub out">Abeg I need toilet roll, Indomie and a charger. Rio Hostel, Room 14 🙏<small>8:42 PM</small></div>
+            <div class="bub in">Got you 👌 Toilet roll ₵22, Indomie 5-pack ₵35, charger ₵45. Delivery to Abeka ₵10.<small>8:43 PM</small></div>
+            <div class="bub in"><b>Total ₵112</b> · Order <b>#EB-2401</b>. Confirm?<small>8:43 PM</small></div>
+            <div class="bub out">Confirmed. Sending MoMo now 💸<small>8:44 PM</small></div>
+            <div class="bub in">Runner is on the way. 20 mins max 🏃‍♂️💨<small>8:46 PM</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ============ HOW ============ -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">How it works</div>
+      <h2>Four steps. That's the whole thing.</h2>
+      <p class="lead">Designed to feel as easy as sending a message — because that's exactly what it is.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv" style="--c:var(--amber)">
+        <div class="step-ico">💬</div><div class="step-n"></div>
+        <h3>Send the request</h3>
+        <p>Build a basket here or just type your list on WhatsApp. Describe any errand in your own words.</p>
+      </div>
+      <div class="step rv" style="--c:var(--teal)">
+        <div class="step-ico">✅</div><div class="step-n"></div>
+        <h3>We confirm</h3>
+        <p>We check availability and send back the real cost plus the delivery fee. No hidden markup, ever.</p>
+      </div>
+      <div class="step rv" style="--c:var(--coral)">
+        <div class="step-ico">🛍️</div><div class="step-n"></div>
+        <h3>We source it</h3>
+        <p>Our procurement guy buys or collects it, verifies the item and keeps the receipt for you.</p>
+      </div>
+      <div class="step rv" style="--c:var(--orange)">
+        <div class="step-ico">🛵</div><div class="step-n"></div>
+        <h3>We deliver</h3>
+        <p>A runner brings it to your hostel, your room, your lecture hall — wherever you actually are.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">What we do</div>
+      <h2>Three things, done properly.</h2>
+    </div>
+    <div class="pillars">
+      <div class="pillar rv" style="--c:var(--amber)">
+        <div class="big">🧺</div>
+        <h3>Campus essentials, delivered</h3>
+        <p>The stuff you always run out of at the worst possible time.</p>
+        <ul>
+          <li>Toiletries, cleaning &amp; hostel basics</li>
+          <li>Snacks, drinks, noodles &amp; food packs</li>
+          <li>Pens, paper, files &amp; printing runs</li>
+          <li>Chargers, bulbs, extensions &amp; batteries</li>
+        </ul>
+        <a href="#shop" class="btn btn-amber btn-sm">Browse the shop</a>
+      </div>
+      <div class="pillar rv" style="--c:var(--teal)">
+        <div class="big">🏃</div>
+        <h3>Buy-for-me &amp; errands</h3>
+        <p>If it's legal and it's reachable, we'll handle it.</p>
+        <ul>
+          <li>Buy something specific from town</li>
+          <li>Printing, binding &amp; document pickup</li>
+          <li>Pick up / drop off between campuses</li>
+          <li>Queue-standing and urgent runs</li>
+        </ul>
+        <a href="#errands" class="btn btn-teal btn-sm">Send an errand</a>
+      </div>
+      <div class="pillar rv" style="--c:var(--coral)">
+        <div class="big">📣</div>
+        <h3>Blow your brand</h3>
+        <p>You sell something on campus? We put it in front of students daily.</p>
+        <ul>
+          <li>WhatsApp Status shoutouts to our list</li>
+          <li>Instagram &amp; TikTok story features</li>
+          <li>Your flyer inside every delivery bag</li>
+          <li>Flat fees — no commission on your sales</li>
+        </ul>
+        <a href="#brands" class="btn btn-ghost btn-sm">See ad packages</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SHOP ============ -->
+<section id="shop">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">The shop</div>
+      <h2>Tap what you need. We bring it.</h2>
+      <p class="lead">Add items to your basket, tell us your hostel and room, and send it straight to our WhatsApp. Takes about 60 seconds.</p>
+    </div>
+    <div class="shop-bar">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input type="search" id="q" placeholder="Search toilet roll, Indomie, charger…" aria-label="Search products">
+      </div>
+      <div class="cats" id="cats"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="note" style="margin-top:22px;text-align:left">
+      Can't find it? That's what <a href="#errands" style="color:var(--amber);font-weight:700">Buy-for-me</a> is for — we'll source anything reasonable.
+    </p>
+  </div>
+</section>
+
+<!-- ============ ERRANDS ============ -->
+<section id="errands" class="alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">Buy-for-me</div>
+      <h2>Not in the shop? Still sorted.</h2>
+      <p class="lead">Describe it in plain words — pidgin, Twi, English, whatever. We'll quote you before we spend a pesewa.</p>
+    </div>
+    <div class="two">
+      <div class="panel rv">
+        <h3>Send us your errand</h3>
+        <p class="sub">We reply with a quote first. You only pay once you approve it.</p>
+        <div class="form">
+          <div class="fld" id="f-ename">
+            <label for="ename">Your name <span class="req">*</span></label>
+            <input id="ename" placeholder="e.g. Kwame Mensah">
+          </div>
+          <div class="row2">
+            <div class="fld" id="f-ezone">
+              <label for="ezone">Deliver to <span class="req">*</span></label>
+              <select id="ezone"></select>
+            </div>
+            <div class="fld" id="f-eroom">
+              <label for="eroom">Room / landmark <span class="req">*</span></label>
+              <input id="eroom" placeholder="Room 14, 2nd floor">
+            </div>
+          </div>
+          <div class="fld" id="f-etask">
+            <label for="etask">What do you need? <span class="req">*</span></label>
+            <textarea id="etask" placeholder="e.g. Print and bind my 40-page project at the shop near Tesano Total, then bring it to me. Soft copy is on my WhatsApp."></textarea>
+          </div>
+          <div class="row2">
+            <div class="fld">
+              <label for="ebudget">Rough budget (optional)</label>
+              <input id="ebudget" inputmode="numeric" placeholder="GH₵ 60">
+            </div>
+            <div class="fld">
+              <label for="ewhen">When?</label>
+              <select id="ewhen">
+                <option>As soon as possible</option>
+                <option>Later today</option>
+                <option>Tomorrow</option>
+                <option>I'll say on WhatsApp</option>
+              </select>
+            </div>
+          </div>
+          <a class="btn btn-wa btn-block" id="errandSend" href="#" target="_blank" rel="noopener">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.2s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.7 5.9 5.2 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/><path d="M12 2A10 10 0 0 0 3.5 17.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+            Send errand on WhatsApp
+          </a>
+          <p class="note">Opens WhatsApp with your request pre-written. Nothing is sent until you press send.</p>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="ex-list">
+          <div class="ex" style="--c:var(--amber)"><div class="ex-i">🖨️</div><div><b>Printing &amp; binding</b><span>Send the soft copy, we print, bind and bring it before your deadline.</span></div></div>
+          <div class="ex" style="--c:var(--teal)"><div class="ex-i">🍛</div><div><b>Food from off-campus</b><span>That waakye spot you like but can't be bothered to walk to.</span></div></div>
+          <div class="ex" style="--c:var(--coral)"><div class="ex-i">💊</div><div><b>Pharmacy runs</b><span>You're sick, you shouldn't be the one walking. We'll go.</span></div></div>
+          <div class="ex" style="--c:var(--orange)"><div class="ex-i">📦</div><div><b>Pickup &amp; drop-off</b><span>Between Tesano campus, Abeka campus, hostels or a courier office.</span></div></div>
+          <div class="ex" style="--c:var(--amber)"><div class="ex-i">🧾</div><div><b>Queue standing</b><span>Bank, bills, school office. We hold the line, you keep studying.</span></div></div>
+          <div class="ex" style="--c:var(--teal)"><div class="ex-i">🎁</div><div><b>Surprise deliveries</b><span>Birthday gifts and "I'm sorry" packages, delivered to their room.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BRANDS ============ -->
+<section id="brands">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">For student brands</div>
+      <h2>We already have the campus's attention.<br>Borrow it.</h2>
+      <p class="lead">Every day we're in hostel group chats, on students' WhatsApp Status and physically at their doors. If you sell shoes, food, hair, clothes, tech or a service at GCTU — we'll put you in front of them. Flat fee, no cut of your sales.</p>
+    </div>
+    <div class="tiers">
+      <div class="tier rv" style="--c:var(--teal)">
+        <div class="tier-n">Quick Shout</div>
+        <div class="tier-p">GH₵15</div>
+        <div class="tier-d">One-off · 24 hours</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>1 WhatsApp Status post</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Your flyer + caption + contact</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Live for a full 24 hours</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Screenshot proof after posting</li>
+        </ul>
+        <button class="btn btn-ghost btn-sm book" data-pkg="Quick Shout — GH₵15">Book this</button>
+      </div>
+      <div class="tier feat rv" style="--c:var(--amber)">
+        <div class="tier-n">Weekend Push</div>
+        <div class="tier-p">GH₵40</div>
+        <div class="tier-d">3 days · best value starter</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>3 Status posts over 3 days</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>1 Instagram + 1 TikTok story</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Shared to our broadcast list</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Posted at peak hours (7–10pm)</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Simple view-count report</li>
+        </ul>
+        <button class="btn btn-amber btn-sm book" data-pkg="Weekend Push — GH₵40">Book this</button>
+      </div>
+      <div class="tier rv" style="--c:var(--coral)">
+        <div class="tier-n">Campus Takeover</div>
+        <div class="tier-p">GH₵90</div>
+        <div class="tier-d">7 days · online + physical</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Daily Status post for 7 days</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>1 Instagram feed post</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>1 TikTok video featuring you</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><b style="color:var(--txt)">Your flyer in every delivery bag</b> that week</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Weekly performance report</li>
+        </ul>
+        <button class="btn btn-ghost btn-sm book" data-pkg="Campus Takeover — GH₵90">Book this</button>
+      </div>
+      <div class="tier rv" style="--c:var(--orange)">
+        <div class="tier-n">Semester Partner</div>
+        <div class="tier-p">GH₵250<small>/month</small></div>
+        <div class="tier-d">Always-on presence</div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Everything in Takeover, ×4 weeks</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Logo on this website</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Mentioned in order confirmations</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Your products stocked on request</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Priority during freshers' week</li>
+        </ul>
+        <button class="btn btn-ghost btn-sm book" data-pkg="Semester Partner — GH₵250/month">Book this</button>
+      </div>
+    </div>
+
+    <div class="addons rv">
+      <div class="addon"><span class="ai">📄</span><div><b>Flyers in delivery bags</b><span>100 flyers, hand-delivered</span></div><span class="ap">+GH₵30</span></div>
+      <div class="addon"><span class="ai">🎨</span><div><b>We design your flyer</b><span>One revision included</span></div><span class="ap">+GH₵25</span></div>
+      <div class="addon"><span class="ai">🎁</span><div><b>Product sampling run</b><span>We hand out your samples</span></div><span class="ap">+GH₵50</span></div>
+    </div>
+
+    <div class="founding rv">
+      <span class="fi">🚀</span>
+      <div>
+        <b>Founding partner rates</b>
+        <p>We're new — and we're pricing like it. Book before our campus launch and these rates are locked for your whole semester, even after we raise them. You get our full attention while we're hungry.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ZONES ============ -->
+<section id="zones" class="alt">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">Zones &amp; fees</div>
+      <h2>You see the fee before you pay.</h2>
+      <p class="lead">One flat delivery fee per zone. No surge nonsense, no "my brother the fuel price" conversations at your door.</p>
+    </div>
+    <div class="zones" id="zoneCards"></div>
+    <div class="founding rv" style="background:linear-gradient(100deg,rgba(255,193,7,.08),rgba(255,122,61,.06));border-color:rgba(255,193,7,.26)">
+      <span class="fi">⏱️</span>
+      <div>
+        <b>Urgent run? +GH₵5</b>
+        <p>Normal delivery is within about an hour during the day. If you need it <em>now</em>, we'll drop everything for a small rush fee — and we'll tell you before we move.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="eyebrow">Questions</div>
+      <h2>The honest answers.</h2>
+    </div>
+    <div class="faq">
+      <details class="rv"><summary>How do I pay?</summary><p>Mobile Money to our business number, or cash on delivery for small orders. For "buy-for-me" errands where we're spending our own money upfront, we ask you to pay before we buy — that protects both of us. Every single order gets an order number and a record.</p></details>
+      <details class="rv"><summary>Do you add secret markup on the products?</summary><p>No. We earn from the delivery fee and the errand fee — not from quietly inflating what you'd pay in the shop. For sourced items we'll show you the receipt if you ask. That's the whole business model: you pay for convenience, not for being kept in the dark.</p></details>
+      <details class="rv"><summary>How fast is delivery?</summary><p>Within about an hour during normal hours for in-zone deliveries, often much faster. Items we have to source from town take longer and we'll tell you a realistic time upfront. We'd rather quote you 90 minutes and arrive in 40 than the other way round.</p></details>
+      <details class="rv"><summary>What if you bring the wrong thing?</summary><p>We confirm the item with you before we leave the shop. If we still get it wrong, we swap it or refund you — our problem, not yours. If an item is unavailable we message you with options instead of guessing.</p></details>
+      <details class="rv"><summary>Is there a minimum order?</summary><p>No minimum. One sachet of Milo at midnight is a valid order. The delivery fee is the same whether you order one item or fifteen — so it's worth adding whatever else you're low on.</p></details>
+      <details class="rv"><summary>I run a small business at GCTU. How does the advertising work?</summary><p>You pay a flat fee, we post your brand on our WhatsApp Status and socials, and we send you proof. We don't take commission on your sales — what you make is yours. The Campus Takeover package also puts your physical flyer in every delivery bag we hand out that week, which is the part nobody else on campus can offer you.</p></details>
+      <details class="rv"><summary>Who is actually behind this?</summary><p>A small student team at GCTU running it as a real business, not a side hustle that disappears after two weeks. Every order is logged, every purchase has a receipt, and business money is kept separate from personal money. We're building something we want to still be running after we graduate.</p></details>
+      <details class="rv"><summary>Do you deliver outside the listed zones?</summary><p>Sometimes — message us and we'll quote you. If it's reachable and it makes sense, we'll do it. Our focus right now is GCTU Tesano, Abeka and the hostels around them, so that's where we're fastest and cheapest.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BAND ============ -->
+<section>
+  <div class="wrap">
+    <div class="band rv">
+      <h2>Need it? <span class="amber">We'll get it.</span></h2>
+      <p>Save our number now so it's there at 11pm when you realise you're out of everything.</p>
+      <div class="band-cta">
+        <a href="#shop" class="btn btn-amber">Start an order</a>
+        <a class="btn btn-wa" id="waPlain" href="#" target="_blank" rel="noopener">
+          <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 3.5 17.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm5.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.2s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.7 5.9 5.2 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
+          Chat with us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-col f-about">
+        <a href="#top" class="logo">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <rect width="100" height="100" rx="22" fill="#1a1a21" stroke="#2b2b35" stroke-width="2"/>
+            <path d="M20 24h10l10 38h34l9-26H38" stroke="#FFC107" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="44" cy="76" r="6" fill="#2DD4BF"/><circle cx="70" cy="76" r="6" fill="#2DD4BF"/>
+          </svg>
+          <span class="logo-txt"><b>ERRAND <span class="amber">BOYS</span></b><svg class="sw" viewBox="0 0 120 6" preserveAspectRatio="none" aria-hidden="true"><path d="M2 3.4 C 24 5.6, 41 1.1, 64 2.6 S 100 5.2, 118 1.6" fill="none" stroke="#FF7A3D" stroke-width="2.1" stroke-linecap="round"/></svg><span>Campus runs · errands · essentials</span></span>
+        </a>
+        <p>GCTU's student-run convenience service. Errands, essentials and hostel delivery — plus promotion for student brands.</p>
+        <a class="f-wa" id="waFoot" href="#" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 3.5 17.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm5.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.2s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.7 5.9 5.2 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
+          <span><b id="waNum">0208535546</b><span>WhatsApp us</span></span>
+        </a>
+      </div>
+      <div class="f-col">
+        <h4>Service</h4>
+        <ul>
+          <li><a href="#shop">Shop essentials</a></li>
+          <li><a href="#errands">Buy-for-me</a></li>
+          <li><a href="#errands">Pickup &amp; drop-off</a></li>
+          <li><a href="#zones">Zones &amp; fees</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Brands</h4>
+        <ul>
+          <li><a href="#brands">Ad packages</a></li>
+          <li><a href="#brands">Flyer distribution</a></li>
+          <li><a href="#brands">Semester partner</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Coverage</h4>
+        <ul>
+          <li>GCTU Main Campus, Tesano</li>
+          <li>GCTU Abeka Campus</li>
+          <li>Tesano Palace · Int'l Students Hostel</li>
+          <li>Rio · City View · Golden Child</li>
+          <li>Hostels around Abeka Free Pipe</li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bot">
+      <p>© <span id="yr"></span> Errand Boys · A student-run business at GCTU.</p>
+      <p>Need it? We'll get it.</p>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" id="fab" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 3.5 17.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm5.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.2s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.7 5.9 5.2 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
+</a>
+
+<!-- ============ CART DRAWER ============ -->
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" aria-label="Your basket">
+  <div class="dr-head">
+    <div><h3>Your basket</h3><p id="drSub">Nothing here yet</p></div>
+    <button class="x" id="closeDr" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  </div>
+
+  <div class="dr-body" id="drBody"></div>
+
+  <div class="dr-foot" id="drFoot">
+    <div class="totals">
+      <div class="tr"><span>Items</span><span id="tItems">GH₵0.00</span></div>
+      <div class="tr"><span id="tFeeLbl">Delivery</span><span id="tFee">GH₵0.00</span></div>
+      <div class="tr" id="rushRow" style="display:none"><span>Urgent run</span><span id="tRush">GH₵0.00</span></div>
+      <div class="tr grand"><span>Total</span><span id="tAll">GH₵0.00</span></div>
+    </div>
+    <a class="btn btn-wa btn-block" id="send" href="#" target="_blank" rel="noopener">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2A10 10 0 0 0 3.5 17.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm5.5-5.8c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.2s-.7 1-.9 1.2c-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.6s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.4c.2.2 2.4 3.7 5.9 5.2 2.2.9 3 1 4.1.8.7-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4z"/></svg>
+      Send order on WhatsApp
+    </a>
+    <p class="note">Prices are our best estimate. We confirm the exact total on WhatsApp before you pay anything.</p>
+  </div>
+
+  <div class="sent" id="sentPanel">
+    <div class="sent-ico">✅</div>
+    <h3>Order ready to send</h3>
+    <div class="ordno" id="sentNo">#EB-0000</div>
+    <p>WhatsApp should have opened. If it didn't, copy the message below and send it to <b id="sentNum" class="amber"></b>.</p>
+    <div class="msgbox" id="sentMsg"></div>
+    <button class="btn btn-amber btn-block" id="copyBtn">Copy order message</button>
+    <a class="btn btn-wa btn-block" id="sentLink" href="#" target="_blank" rel="noopener">Open WhatsApp again</a>
+    <button class="btn btn-ghost btn-block" id="newOrder">Start a new order</button>
+  </div>
+</aside>
+
+<div class="toast" id="toast"><span class="tk">✓</span><span id="toastMsg">Added</span></div>
+
+<script>
+/* ==========================================================================
+   ERRAND BOYS — CONFIG
+   >>> EDIT EVERYTHING IN THIS BLOCK. Nothing below it needs touching. <<<
+   ========================================================================== */
+const CONFIG = {
+  // Your WhatsApp number in international format, no + and no spaces.
+  // Ghana = 233, then drop the leading 0.  0208535546  ->  233208535546
+  whatsapp: "233208535546",
+  displayNumber: "0208535546",
+
+  businessName: "Errand Boys",
+
+  // Delivery zones. fee is in GH₵.
+  zones: [
+    { id:"A", name:"On Campus — Tesano", fee:5,  colour:"var(--amber)", desc:"Inside GCTU Main Campus",
+      spots:["GCTU Hostel Blocks A, B & C","Lecture halls & library","Admin block & campus food joints"] },
+    { id:"B", name:"Tesano Ring", fee:7, colour:"var(--teal)", desc:"Within ~1.5 km of main campus",
+      spots:["International Students Hostel","Tesano Palace","Delicious Hostel / Tesano Total area"] },
+    { id:"C", name:"Abeka", fee:10, colour:"var(--coral)", desc:"Around GCTU Abeka Campus",
+      spots:["GCTU Abeka Campus","Rio Hostel & Rio Extension","City View (Free Pipe) · Golden Child"] },
+    { id:"D", name:"Outside the zones", fee:0, colour:"var(--orange)", desc:"We quote you first",
+      spots:["Anywhere else reachable","Message us with the location","Fee agreed before we move"] }
+  ],
+  rushFee: 5,
+
+  // Product catalogue. emoji = the tile picture. tag is optional (small badge).
+  products: [
+    // --- Essentials ---
+    {n:"Toilet roll (4-pack)", p:22, c:"essentials", e:"🧻", d:"Soft, 2-ply", tag:"Top seller"},
+    {n:"Key Soap (bar)", p:12, c:"essentials", e:"🧼", d:"For washing clothes"},
+    {n:"Bath soap", p:15, c:"essentials", e:"🫧", d:"Lux / Geisha / your choice"},
+    {n:"Toothpaste", p:25, c:"essentials", e:"🪥", d:"Colgate 100ml"},
+    {n:"Toothbrush", p:10, c:"essentials", e:"🪥", d:"Medium bristle"},
+    {n:"Detergent (400g)", p:18, c:"essentials", e:"🧴", d:"Omo or similar"},
+    {n:"Dishwashing liquid", p:20, c:"essentials", e:"🍽️", d:"500ml"},
+    {n:"Sponge & scourer", p:8, c:"essentials", e:"🧽", d:"Pack of 2"},
+    {n:"Air freshener", p:30, c:"essentials", e:"🌸", d:"Room spray"},
+    {n:"Mosquito spray", p:35, c:"essentials", e:"🦟", d:"Or coils if you prefer"},
+    {n:"Roll-on deodorant", p:35, c:"essentials", e:"🧴", d:"Men's or women's"},
+    {n:"Body lotion", p:40, c:"essentials", e:"🧴", d:"400ml"},
+    {n:"Shaving sticks (pack)", p:15, c:"essentials", e:"🪒", d:"Pack of 5"},
+    {n:"Hand sanitizer", p:18, c:"essentials", e:"🧴", d:"100ml"},
+    {n:"Tissue (box)", p:20, c:"essentials", e:"🤧", d:"Facial tissue"},
+    {n:"Rubber bucket", p:35, c:"essentials", e:"🪣", d:"Medium size"},
+    {n:"Broom & dustpan", p:30, c:"essentials", e:"🧹", d:"Set"},
+    {n:"Hangers (10-pack)", p:25, c:"essentials", e:"👕", d:"Plastic"},
+
+    // --- Food & drinks ---
+    {n:"Sachet water (bag)", p:8, c:"food", e:"💧", d:"30 sachets", tag:"Top seller"},
+    {n:"Bottled water 1.5L", p:8, c:"food", e:"🚰", d:"Voltic / Bel-Aqua"},
+    {n:"Indomie (5-pack)", p:35, c:"food", e:"🍜", d:"Chicken or onion", tag:"Top seller"},
+    {n:"Indomie (single)", p:8, c:"food", e:"🍜", d:"One pack"},
+    {n:"Milo sachets", p:25, c:"food", e:"🥤", d:"Pack of 10"},
+    {n:"Milk powder sachets", p:20, c:"food", e:"🥛", d:"Pack of 10"},
+    {n:"Tea bread", p:15, c:"food", e:"🍞", d:"Fresh loaf"},
+    {n:"Eggs (half crate)", p:40, c:"food", e:"🥚", d:"15 eggs"},
+    {n:"Biscuits", p:6, c:"food", e:"🍪", d:"Digestive / cream"},
+    {n:"Chocolate bar", p:12, c:"food", e:"🍫", d:"Golden Tree"},
+    {n:"Soft drink 500ml", p:12, c:"food", e:"🥤", d:"Coke / Fanta / Sprite"},
+    {n:"Energy drink", p:15, c:"food", e:"⚡", d:"For the all-nighter"},
+    {n:"Instant coffee", p:20, c:"food", e:"☕", d:"Sachets, pack of 10"},
+    {n:"Rice (1kg)", p:30, c:"food", e:"🍚", d:"Perfumed / jasmine"},
+    {n:"Tomato paste", p:8, c:"food", e:"🥫", d:"Small tin"},
+    {n:"Cooking oil (500ml)", p:22, c:"food", e:"🫗", d:"Frytol or similar"},
+    {n:"Gari (1kg)", p:20, c:"food", e:"🥣", d:"Fine grain"},
+    {n:"Sugar (500g)", p:12, c:"food", e:"🍬", d:"Granulated"},
+
+    // --- Study ---
+    {n:"Pens (5-pack)", p:12, c:"study", e:"🖊️", d:"Blue or black"},
+    {n:"Pencil & eraser set", p:10, c:"study", e:"✏️", d:"With sharpener"},
+    {n:"A4 notebook", p:15, c:"study", e:"📓", d:"120 pages"},
+    {n:"Ream of A4 paper", p:75, c:"study", e:"📄", d:"500 sheets"},
+    {n:"File folder", p:8, c:"study", e:"📁", d:"Clear or card"},
+    {n:"Stapler + pins", p:35, c:"study", e:"📎", d:"Standard size"},
+    {n:"Highlighter set", p:25, c:"study", e:"🖍️", d:"4 colours"},
+    {n:"Scientific calculator", p:90, c:"study", e:"🧮", d:"Casio-style"},
+    {n:"Sticky notes", p:15, c:"study", e:"🗒️", d:"Pack of 3"},
+
+    // --- Tech ---
+    {n:"Phone charger", p:45, c:"tech", e:"🔌", d:"Android or iPhone", tag:"Top seller"},
+    {n:"USB cable", p:25, c:"tech", e:"🔗", d:"Type-C / lightning"},
+    {n:"Earphones", p:35, c:"tech", e:"🎧", d:"Wired, with mic"},
+    {n:"Extension board", p:85, c:"tech", e:"🔋", d:"4 sockets + surge"},
+    {n:"LED bulb", p:25, c:"tech", e:"💡", d:"Energy saving"},
+    {n:"Batteries (AA, 4-pack)", p:15, c:"tech", e:"🔋", d:"Alkaline"},
+    {n:"Power bank", p:150, c:"tech", e:"🔋", d:"10,000mAh"},
+    {n:"Memory card 32GB", p:60, c:"tech", e:"💾", d:"MicroSD"},
+
+    // --- Health ---
+    {n:"Paracetamol", p:8, c:"health", e:"💊", d:"Pack"},
+    {n:"Sanitary pads", p:25, c:"health", e:"🩸", d:"Always / Kotex"},
+    {n:"Plasters", p:10, c:"health", e:"🩹", d:"Pack of 10"},
+    {n:"Antiseptic (Dettol)", p:25, c:"health", e:"🧪", d:"125ml"},
+    {n:"Vitamin C", p:20, c:"health", e:"🍊", d:"Tablets"},
+    {n:"Cold & flu tablets", p:20, c:"health", e:"🤒", d:"Pack"}
+  ],
+
+  categories: [
+    {id:"all",        label:"Everything", c:"var(--amber)"},
+    {id:"essentials", label:"🧻 Essentials", c:"var(--amber)"},
+    {id:"food",       label:"🍜 Food & drinks", c:"var(--teal)"},
+    {id:"study",      label:"📓 Study", c:"var(--coral)"},
+    {id:"tech",       label:"🔌 Tech", c:"var(--orange)"},
+    {id:"health",     label:"💊 Health", c:"var(--teal)"}
+  ]
+};
+/* ====================== END OF CONFIG ====================== */
+
+const $  = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>[...r.querySelectorAll(s)];
+const catColour = id => (CONFIG.categories.find(c=>c.id===id)||{}).c || "var(--amber)";
+const gh = n => "GH₵" + Number(n).toLocaleString("en-GH",{minimumFractionDigits:2,maximumFractionDigits:2});
+const waLink = txt => "https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(txt);
+
+/* ---- safe storage (preview iframes block localStorage) ---- */
+const store = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+};
+
+/* ---- state ---- */
+let cart = store.get("eb_cart") || {};
+let activeCat = "all", query = "";
+
+/* ---- year + numbers ---- */
+$("#yr").textContent = new Date().getFullYear();
+$("#waNum").textContent = CONFIG.displayNumber;
+$("#sentNum").textContent = CONFIG.displayNumber;
+const hello = waLink("Hi "+CONFIG.businessName+" 👋 I'd like to make an order.");
+["#fab","#waFoot","#waPlain"].forEach(s=>$(s).href = hello);
+
+/* ---- build category pills ---- */
+$("#cats").innerHTML = CONFIG.categories.map(c=>
+  `<button class="cat${c.id==="all"?" on":""}" data-cat="${c.id}">${c.label}</button>`).join("");
+$$("#cats .cat").forEach(b=>b.onclick=()=>{
+  activeCat=b.dataset.cat; $$("#cats .cat").forEach(x=>x.classList.toggle("on",x===b)); renderGrid();
+});
+
+/* ---- build zone cards + selects ---- */
+$("#zoneCards").innerHTML = CONFIG.zones.map(z=>`
+  <div class="zone rv" style="--c:${z.colour}">
+    <div class="zone-t"><span class="zone-b">${z.id}</span><h3>${z.name}</h3></div>
+    <div class="fee">${z.fee ? gh(z.fee) : "Ask us"}<small>${z.fee?" delivery":""}</small></div>
+    <p style="font-size:.82rem;color:var(--mut)">${z.desc}</p>
+    <ul>${z.spots.map(s=>`<li>• ${s}</li>`).join("")}</ul>
+  </div>`).join("");
+
+const zoneOpts = `<option value="">Choose your location…</option>` +
+  CONFIG.zones.map(z=>`<option value="${z.id}">${z.name}${z.fee?` — ${gh(z.fee)}`:" — quote"}</option>`).join("");
+
+/* ---- grid ---- */
+function renderGrid(){
+  const q = query.trim().toLowerCase();
+  const list = CONFIG.products.filter(p=>
+    (activeCat==="all"||p.c===activeCat) &&
+    (!q || p.n.toLowerCase().includes(q) || (p.d||"").toLowerCase().includes(q) || p.c.includes(q))
+  );
+  if(!list.length){
+    $("#grid").innerHTML = `<div class="empty"><div>🔍</div><p>No match for "<b>${query}</b>".</p>
+      <p style="margin-top:8px"><a href="#errands" style="color:var(--amber);font-weight:700">Ask us to buy it for you →</a></p></div>`;
+    return;
+  }
+  $("#grid").innerHTML = list.map(p=>{
+    const key = p.n, q2 = cart[key]?.q || 0, col = catColour(p.c);
+    const label = (CONFIG.categories.find(c=>c.id===p.c)||{}).label || p.c;
+    return `<article class="card" style="--c:${col}">
+      <div class="card-img">${p.tag?`<span class="tag">${p.tag}</span>`:""}${p.e}</div>
+      <div class="card-b">
+        <span class="card-cat">${label.replace(/^[^A-Za-z]+/,"")}</span>
+        <span class="card-n">${p.n}</span>
+        <span class="card-d">${p.d||""}</span>
+        <div class="card-f">
+          <span class="price">${gh(p.p)}</span>
+          ${q2 ? `<div class="qty-mini"><button data-dec="${key}" aria-label="Remove one">−</button><span>${q2}</span><button data-inc="${key}" aria-label="Add one">+</button></div>`
+                : `<button class="add" data-add="${key}" aria-label="Add ${p.n}">+</button>`}
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+/* ---- cart ops ---- */
+function find(n){ return CONFIG.products.find(p=>p.n===n); }
+function addItem(n,silent){
+  const p = find(n); if(!p) return;
+  cart[n] = {q:(cart[n]?.q||0)+1, p:p.p, e:p.e};
+  save(); if(!silent) toast(`${p.e}  ${n} added`);
+}
+function decItem(n){
+  if(!cart[n]) return;
+  cart[n].q--; if(cart[n].q<=0) delete cart[n];
+  save();
+}
+function removeItem(n){ delete cart[n]; save(); toast("Removed"); }
+function save(){ store.set("eb_cart",cart); renderGrid(); renderCart(); }
+
+const count = () => Object.values(cart).reduce((s,i)=>s+i.q,0);
+const itemsTotal = () => Object.values(cart).reduce((s,i)=>s+i.q*i.p,0);
+
+/* ---- cart drawer ---- */
+function renderCart(){
+  const n = count();
+  $("#cc").textContent = n;
+  $("#drSub").textContent = n ? `${n} item${n>1?"s":""} in your basket` : "Nothing here yet";
+
+  if(!n){
+    $("#drBody").innerHTML = `<div class="empty" style="padding:48px 10px"><div>🛒</div>
+      <p>Your basket is empty.</p>
+      <p style="margin-top:14px"><button class="btn btn-amber btn-sm" id="goShop">Browse the shop</button></p></div>`;
+    $("#drFoot").style.display="none";
+    const g=$("#goShop"); if(g) g.onclick=()=>{ closeDrawer(); $("#shop").scrollIntoView({behavior:"smooth"}); };
+    return;
+  }
+  $("#drFoot").style.display="flex";
+
+  const rows = Object.entries(cart).map(([n2,i])=>`
+    <div class="ci">
+      <div class="ci-img">${i.e}</div>
+      <div class="ci-m"><b>${n2}</b><span>${gh(i.p)} each</span>
+        <div class="qty-mini" style="margin-top:7px;width:max-content">
+          <button data-dec="${n2}">−</button><span>${i.q}</span><button data-inc="${n2}">+</button>
+        </div>
+      </div>
+      <div class="ci-r"><span class="ci-p">${gh(i.q*i.p)}</span><button class="rm" data-rm="${n2}">remove</button></div>
+    </div>`).join("");
+
+  // keep whatever the customer already typed
+  const keep = {
+    name:$("#cname")?.value||"", zone:$("#czone")?.value||"", room:$("#croom")?.value||"",
+    pay:$$('input[name="pay"]').find(r=>r.checked)?.value||"Mobile Money",
+    rush:$("#crush")?.checked||false, note:$("#cnote")?.value||""
+  };
+
+  $("#drBody").innerHTML = rows + `
+    <div style="height:4px"></div>
+    <div class="fld" id="f-cname"><label for="cname">Your name <span class="req">*</span></label>
+      <input id="cname" placeholder="e.g. Ama Boateng" value="${keep.name.replace(/"/g,'&quot;')}"></div>
+    <div class="fld" id="f-czone"><label for="czone">Hostel / location <span class="req">*</span></label>
+      <select id="czone">${zoneOpts}</select></div>
+    <div class="fld" id="f-croom"><label for="croom">Hostel name, room &amp; landmark <span class="req">*</span></label>
+      <input id="croom" placeholder="Rio Hostel, Room 14, 2nd floor" value="${keep.room.replace(/"/g,'&quot;')}">
+      <span class="hint">Be specific — it's how the runner finds you fast.</span></div>
+    <div class="fld"><label>Payment</label>
+      <div class="seg">
+        <label class="${keep.pay==="Mobile Money"?"on":""}"><input type="radio" name="pay" value="Mobile Money" ${keep.pay==="Mobile Money"?"checked":""}><span>MoMo</span></label>
+        <label class="${keep.pay==="Cash on delivery"?"on":""}"><input type="radio" name="pay" value="Cash on delivery" ${keep.pay==="Cash on delivery"?"checked":""}><span>Cash on delivery</span></label>
+      </div></div>
+    <div class="fld"><label style="display:flex;align-items:center;gap:10px;cursor:pointer;text-transform:none;letter-spacing:0;font-size:.88rem;color:var(--txt)">
+      <input type="checkbox" id="crush" ${keep.rush?"checked":""} style="width:17px;height:17px;accent-color:var(--amber);flex:none">
+      I need it urgently (+${gh(CONFIG.rushFee)})</label></div>
+    <div class="fld"><label for="cnote">Anything else?</label>
+      <textarea id="cnote" placeholder="Call me when you reach the gate. Get the onion flavour if chicken is finished.">${keep.note}</textarea></div>`;
+
+  $("#czone").value = keep.zone;
+  $("#czone").onchange = recalc;
+  $("#crush").onchange = recalc;
+  ["#cname","#croom","#cnote"].forEach(s=>$(s).oninput = recalc);
+  $$('input[name="pay"]').forEach(r=>r.onchange=()=>{
+    $$('.seg label').forEach(l=>l.classList.toggle("on", l.querySelector("input").checked));
+    recalc();
+  });
+  recalc();
+}
+
+function currentZone(){ return CONFIG.zones.find(z=>z.id===$("#czone")?.value); }
+
+function recalc(){
+  const z = currentZone();
+  const items = itemsTotal();
+  const fee = z ? z.fee : 0;
+  const rush = $("#crush")?.checked ? CONFIG.rushFee : 0;
+  $("#tItems").textContent = gh(items);
+  $("#tFeeLbl").textContent = z ? `Delivery — Zone ${z.id}` : "Delivery";
+  $("#tFee").textContent = (z && !z.fee) ? "We'll quote" : gh(fee);
+  $("#rushRow").style.display = rush ? "flex" : "none";
+  $("#tRush").textContent = gh(rush);
+  $("#tAll").textContent = gh(items + fee + rush);
+  $("#send").href = waLink(buildMsg(false));
+}
+
+function orderNo(){
+  const d = new Date();
+  const p = n => String(n).padStart(2,"0");
+  return `EB-${String(d.getFullYear()).slice(2)}${p(d.getMonth()+1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}`;
+}
+
+function buildMsg(withNo){
+  const z = currentZone();
+  const items = itemsTotal();
+  const fee = z ? z.fee : 0;
+  const rush = $("#crush")?.checked ? CONFIG.rushFee : 0;
+  const lines = Object.entries(cart).map(([n,i])=>`• ${i.q} × ${n} — ${gh(i.q*i.p)}`);
+  return [
+    `*NEW ORDER — ${CONFIG.businessName}*`,
+    withNo ? `Order no: *${withNo}*` : null,
+    ``,
+    `*Items*`,
+    ...lines,
+    ``,
+    `Items total: ${gh(items)}`,
+    z ? (z.fee ? `Delivery (Zone ${z.id} — ${z.name}): ${gh(fee)}` : `Delivery (${z.name}): to be quoted`) : `Delivery: not selected yet`,
+    rush ? `Urgent run: ${gh(rush)}` : null,
+    `*Estimated total: ${gh(items+fee+rush)}*`,
+    ``,
+    `*Deliver to*`,
+    `Name: ${$("#cname")?.value || "—"}`,
+    `Location: ${z ? z.name : "—"}`,
+    `Room / landmark: ${$("#croom")?.value || "—"}`,
+    `Payment: ${$$('input[name="pay"]').find(r=>r.checked)?.value || "Mobile Money"}`,
+    $("#cnote")?.value ? `Note: ${$("#cnote").value}` : null,
+    ``,
+    `Sent from the Errand Boys website.`
+  ].filter(x=>x!==null).join("\n");
+}
+
+/* ---- validation + send ---- */
+function flag(id,bad){ const el=$(id); if(el) el.classList.toggle("err",bad); }
+
+$("#send").addEventListener("click", e=>{
+  const name = $("#cname")?.value.trim(), zone = $("#czone")?.value, room = $("#croom")?.value.trim();
+  flag("#f-cname",!name); flag("#f-czone",!zone); flag("#f-croom",!room);
+  if(!name || !zone || !room){
+    e.preventDefault();
+    toast("Fill in your name, location and room first","⚠️");
+    (!name ? $("#cname") : !zone ? $("#czone") : $("#croom")).focus();
+    return;
+  }
+  const no = orderNo();
+  const msg = buildMsg(no);
+  const link = waLink(msg);
+  e.currentTarget.href = link;
+  $("#sentNo").textContent = "#"+no;
+  $("#sentMsg").textContent = msg;
+  $("#sentLink").href = link;
+  setTimeout(()=>{
+    $("#drBody").style.display="none"; $("#drFoot").style.display="none";
+    $("#sentPanel").classList.add("on");
+  },240);
+});
+
+$("#newOrder").onclick = ()=>{
+  cart = {}; save();
+  $("#sentPanel").classList.remove("on");
+  $("#drBody").style.display=""; 
+  closeDrawer(); toast("Basket cleared — order again anytime");
+};
+
+$("#copyBtn").onclick = async ()=>{
+  const t = $("#sentMsg").textContent;
+  try{ await navigator.clipboard.writeText(t); toast("Message copied"); }
+  catch(e){
+    const ta=document.createElement("textarea"); ta.value=t; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); toast("Message copied"); }catch(_){ toast("Select the text to copy it","ℹ️"); }
+    ta.remove();
+  }
+};
+
+/* ---- errand form ---- */
+$("#ezone").innerHTML = zoneOpts;
+function errandMsg(){
+  const z = CONFIG.zones.find(x=>x.id===$("#ezone").value);
+  return [
+    `*ERRAND REQUEST — ${CONFIG.businessName}*`,
+    ``,
+    `*What I need*`,
+    $("#etask").value.trim() || "—",
+    ``,
+    `Name: ${$("#ename").value.trim() || "—"}`,
+    `Location: ${z ? z.name : "—"}`,
+    `Room / landmark: ${$("#eroom").value.trim() || "—"}`,
+    $("#ebudget").value.trim() ? `Rough budget: ${$("#ebudget").value.trim()}` : null,
+    `When: ${$("#ewhen").value}`,
+    z && z.fee ? `Delivery (Zone ${z.id}): ${gh(z.fee)}` : null,
+    ``,
+    `Please quote me before you buy anything 🙏`
+  ].filter(x=>x!==null).join("\n");
+}
+["#ename","#eroom","#etask","#ebudget"].forEach(s=>$(s).oninput = ()=> $("#errandSend").href = waLink(errandMsg()));
+["#ezone","#ewhen"].forEach(s=>$(s).onchange = ()=> $("#errandSend").href = waLink(errandMsg()));
+$("#errandSend").href = waLink(errandMsg());
+$("#errandSend").addEventListener("click", e=>{
+  const n=$("#ename").value.trim(), z=$("#ezone").value, r=$("#eroom").value.trim(), t=$("#etask").value.trim();
+  flag("#f-ename",!n); flag("#f-ezone",!z); flag("#f-eroom",!r); flag("#f-etask",!t);
+  if(!n||!z||!r||!t){
+    e.preventDefault(); toast("Fill in the starred fields first","⚠️");
+    (!n?$("#ename"):!z?$("#ezone"):!r?$("#eroom"):$("#etask")).focus(); return;
+  }
+  e.currentTarget.href = waLink(errandMsg());
+  toast("Opening WhatsApp…","💬");
+});
+
+/* ---- brand booking ---- */
+$$(".book").forEach(b=> b.onclick = ()=>{
+  const msg = [
+    `*AD BOOKING — ${CONFIG.businessName}*`,
+    ``,
+    `Package: *${b.dataset.pkg}*`,
+    ``,
+    `My brand: `,
+    `What I sell: `,
+    `When I want it to run: `,
+    ``,
+    `I'd like to book this package. Send me the details 🙏`
+  ].join("\n");
+  const a = document.createElement("a");
+  a.href = waLink(msg); a.target="_blank"; a.rel="noopener";
+  document.body.appendChild(a); a.click(); a.remove();
+  toast("Opening WhatsApp to book "+b.dataset.pkg.split("—")[0].trim(),"📣");
+});
+
+/* ---- delegated clicks ---- */
+document.addEventListener("click", e=>{
+  const a = e.target.closest("[data-add]"), i = e.target.closest("[data-inc]"),
+        d = e.target.closest("[data-dec]"), r = e.target.closest("[data-rm]");
+  if(a) addItem(a.dataset.add);
+  if(i) addItem(i.dataset.inc, true);
+  if(d) decItem(d.dataset.dec);
+  if(r) removeItem(r.dataset.rm);
+});
+
+/* ---- search ---- */
+$("#q").addEventListener("input", e=>{ query = e.target.value; renderGrid(); });
+
+/* ---- drawer open/close ---- */
+function openDrawer(){
+  $("#sentPanel").classList.remove("on"); $("#drBody").style.display="";
+  $("#drawer").classList.add("on"); $("#scrim").classList.add("on"); document.body.classList.add("locked");
+}
+function closeDrawer(){
+  $("#drawer").classList.remove("on"); $("#scrim").classList.remove("on"); document.body.classList.remove("locked");
+}
+$("#cartBtn").onclick = openDrawer;
+$("#closeDr").onclick = closeDrawer;
+$("#scrim").onclick = closeDrawer;
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") closeDrawer(); });
+
+/* ---- toast ---- */
+let tt;
+function toast(msg,icon){
+  $("#toastMsg").textContent = msg;
+  $(".toast .tk").textContent = icon || "✓";
+  $("#toast").classList.add("on");
+  clearTimeout(tt); tt = setTimeout(()=>$("#toast").classList.remove("on"), 2400);
+}
+
+/* ---- nav ---- */
+const nav = $("#nav");
+addEventListener("scroll", ()=> nav.classList.toggle("stuck", scrollY > 14), {passive:true});
+$("#burger").onclick = ()=> $("#navlinks").classList.toggle("on");
+$$("#navlinks a").forEach(a=> a.onclick = ()=> $("#navlinks").classList.remove("on"));
+
+/* ---- reveal on scroll ---- */
+const io = new IntersectionObserver(es=>es.forEach(en=>{
+  if(en.isIntersecting){ en.target.classList.add("show"); io.unobserve(en.target); }
+}),{threshold:.08,rootMargin:"0px 0px -40px 0px"});
+function observeAll(){ $$(".rv:not(.show)").forEach((el,idx)=>{ el.style.transitionDelay=(idx%4)*55+"ms"; io.observe(el); }); }
+
+/* ---- go ---- */
+renderGrid(); renderCart(); observeAll();
+</script>
+</body>
+</html>
